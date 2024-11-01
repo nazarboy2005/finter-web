@@ -35,7 +35,7 @@
 </head>
 
 <body>
-  {% if request.path == '/home/' %}
+  {% if request.path == '/' %}
   <div class="hero_area">
   {% else %}
   <div class="sub_page">
@@ -48,7 +48,7 @@
 {% include 'header.html' %}
     <!-- end header section -->
     <!-- slider section -->
-      {% if request.path == '/home/' %}
+      {% if request.path == '/' %}
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
