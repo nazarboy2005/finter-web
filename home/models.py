@@ -41,27 +41,20 @@ class ServiceModel(models.Model):
         verbose_name_plural = 'Services'
 
 
+class ContactModel(models.Model):
+    name = models.CharField(max_length=50)
+    phone_number = models.CharField(max_length=14)
+    email = models.EmailField()
+    message = models.TextField()
 
+    is_answered = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    service = models.ForeignKey(ServiceModel, on_delete=models.DO_NOTHING, limit_choices_to={'is_available' : True})
 
+    def __str__(self):
+        return f"{self.name} - {self.email}"
 
-
-
-
-
-
-
-# class ContactModel(models.Model):
-#     name = models.CharField(max_length=50)
-#     phone_number = models.CharField(max_length=14)
-#
-#
-#     service = models.Choices
-#     email = ...
-#     message = ...
-#
-#     is_answered = models.BooleanField(default=False)
-#
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     def __str__(self):
-#         return f"{self.name} - {self.email}"
+    class Meta:
+        verbose_name = 'Message'
+        verbose_name_plural = 'Messages'

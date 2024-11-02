@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AboutModel, ServiceModel
+from .models import AboutModel, ServiceModel, ContactModel
 
 
 @admin.register(AboutModel)
@@ -16,3 +16,12 @@ class ServiceModelAdmin(admin.ModelAdmin):
 
     def short_description(self, obj):
         return obj.description[:75]
+
+@admin.register(ContactModel)
+class ContactModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email', 'is_answered', 'service__name', 'short_message']
+    list_filter = ['name', 'email','phone_number', 'is_answered']
+    search_fields = ['name', 'email','phone_number']
+
+    def short_message(self, obj):
+        return obj.message[:50]
