@@ -12,102 +12,23 @@
       <div class="service_container">
         <div class="carousel-wrap ">
           <div class="service_owl-carousel owl-carousel">
+            {% for service in services %}
             <div class="item">
               <div class="box ">
                 <div class="img-box">
-                  <img src="{% static 'images/s1.png' %}" alt="" />
+                  <img src="{{ service.image.url }}" alt="" />
                 </div>
                 <div class="detail-box">
                   <h5>
-                    Home Welding
+                    {{service.name}}
                   </h5>
                   <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
+                    {{service.description}}
                   </p>
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="box ">
-                <div class="img-box">
-                  <img src="{% static 'images/s4.png' %}" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Machine Welding
-                  </h5>
-                  <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <div class="img-box">
-                  <img src="{% static 'images/s6.png' %}" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Car Welding
-                  </h5>
-                  <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <div class="img-box">
-                  <img src="{% static 'images/s1.png' %}" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Home Welding
-                  </h5>
-                  <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <div class="img-box">
-                  <img src="{% static 'images/s4.png' %}" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Machine Welding
-                  </h5>
-                  <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="box ">
-                <div class="img-box">
-                  <img src="{% static 'images/s6.png' %}" alt="" />
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Car Welding
-                  </h5>
-                  <p>
-                    when looking at its layout. The point of using Lorem Ipsum is
-                    that it has a more-or-less normal
-                  </p>
-                </div>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>

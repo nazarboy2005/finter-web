@@ -10,16 +10,18 @@
           </h2>
         </div>
         <p class="detail_p_mt">
-          There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, orThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, orThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or
+          {{ text_about|safe }}
         </p>
+        {% if '/about/' not in request.path %}
         <a href="{% url 'home:about' %}" class="">
           Read More
         </a>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-6 px-0">
       <div class="img-box ">
-        <img src="{% static 'images/about-img.jpg' %}" class="box_img" alt="about img">
+        <img src="{{ image_about.url }}" class="box_img" alt="about img">
       </div>
     </div>
   </div>

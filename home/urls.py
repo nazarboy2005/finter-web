@@ -10,3 +10,5 @@ urlpatterns = [
     path('services/', ServiceView.as_view(), name='services'),
     path('team/', TeamView.as_view(), name='team'),
 ]
+
+
