@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView, CreateView, View
 from django.contrib import messages
 
+from conf import settings
 from .models import AboutModel, ServiceModel, ContactModel, StaffModel, TestimonialModel
 from django.urls import reverse_lazy
 from .forms import ContactModelForm
+from django.core.mail import send_mail
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -38,7 +40,6 @@ class AboutView(TemplateView):
         return context
 
 
-
 class ServiceView(TemplateView):
     template_name = 'service.html'
 
@@ -57,7 +58,6 @@ class TeamView(TemplateView):
         context['workers'] = StaffModel.objects.filter(is_working=True, web_display=True)
 
         return context
-
 
 
 class ContactView(CreateView):
@@ -79,4 +79,15 @@ class ContactView(CreateView):
     def form_invalid(self, form):
         messages.error(self.request, form.errors)
         return redirect("home:contact")
+
+def send_email(email):
+    with open('../subscribe-email.txt', 'r') as file:
+        text = file.read()
+        try:
+            send_mail(message=text, subject="Welcome to FINTER! You've Successfully Subscribed ", recipient_list=[email],
+                      from_email=settings.EMAIL_HOST_USER)
+
+            return True
+        except ConnectionError as e:
+            return False
 
