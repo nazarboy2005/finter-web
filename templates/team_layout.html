@@ -12,51 +12,23 @@
         </p>
       </div>
       <div class="row">
+        {% for worker in workers %}
         <div class="col-md-4 col-sm-6 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="{% static 'images/t1.jpg' %}" alt="">
+              <img src="{{worker.image.url}}" alt="">
             </div>
             <div class="detail-box">
               <h5>
-                Martin Anderson
+                {{worker.name}}
               </h5>
               <h6 class="">
-                supervisor
+                {{worker.position}}
               </h6>
             </div>
           </div>
         </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'images/t2.jpg' %}" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Denny Butler
-              </h5>
-              <h6 class="">
-                supervisor
-              </h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="{% static 'images/t3.jpg' %}" alt="">
-            </div>
-            <div class="detail-box">
-              <h5>
-                Nathan Mcpherson
-              </h5>
-              <h6 class="">
-                supervisor
-              </h6>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>

@@ -52,20 +52,22 @@
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          {% for service in services %}
+<!--          #write something here-->
+          <div class="carousel-item {% if forloop.first %} active {% endif %}">
             <div class="container ">
               <div class="row">
                 <div class="col-lg-10 col-md-11 mx-auto">
                   <div class="detail-box">
                     <h1>
                       We Provide <br>
-                      Welding Services
+                      {{service.name}}
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio omnis fugit, sed tempora praesentium commodi error, hic recusandae repudiandae neque ad molestias, atque veritatis labore quae eveniet autem in
+                      {{service.description}}
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="{% url 'home:contact' %}" class="btn1">
                         Contact Us
                       </a>
                     </div>
@@ -74,50 +76,7 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-lg-10 col-md-11 mx-auto">
-                  <div class="detail-box">
-                    <h1>
-                      We Provide <br>
-                      Welding Services
-                    </h1>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio omnis fugit, sed tempora praesentium commodi error, hic recusandae repudiandae neque ad molestias, atque veritatis labore quae eveniet autem in
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container ">
-              <div class="row">
-                <div class="col-lg-10 col-md-11 mx-auto">
-                  <div class="detail-box">
-                    <h1>
-                      We Provide <br>
-                      Welding Services
-                    </h1>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio omnis fugit, sed tempora praesentium commodi error, hic recusandae repudiandae neque ad molestias, atque veritatis labore quae eveniet autem in
-                    </p>
-                    <div class="btn-box">
-                      <a href="" class="btn1">
-                        Contact Us
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
         <div class="carousel_btn-box">
           <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">

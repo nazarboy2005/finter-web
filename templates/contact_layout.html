@@ -1,58 +1,96 @@
 {% load static %}
 <!-- contact section -->
 <section class="contact_section ">
-<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 px-0">
+                <div class="img-box ">
+                    <img src="{% static 'images/contact-img.jpg' %}" class="box_img" alt="about img">
+                </div>
+            </div>
+            <div class="col-md-5 mx-auto">
+                <div class="form_container">
+                    <div class="heading_container heading_center">
+                        <h2>Get In Touch</h2>
 
-  <div class="row">
-    <div class="col-md-6 px-0">
-      <div class="img-box ">
-        <img src="{% static 'images/contact-img.jpg' %}" class="box_img" alt="about img">
-      </div>
-    </div>
-    <div class="col-md-5 mx-auto">
-      <div class="form_container">
-        <div class="heading_container heading_center">
-          <h2>Get In Touch</h2>
+                        <!-- Inline CSS for messages -->
+                        <style>
+                            .message-container {
+                                margin: 20px 0;
+                                text-align: center;
+                            }
+
+                            .success-message {
+                                color: #28a745; /* Green text color for success messages */
+                                background-color: #d4edda; /* Light green background for success */
+                                padding: 10px 15px;
+                                border: 1px solid #c3e6cb; /* Green border */
+                                border-radius: 5px;
+                                font-weight: bold;
+                                margin: 10px 0;
+                            }
+
+                            .error-message {
+                                color: #dc3545; /* Red text color for error messages */
+                                background-color: #f8d7da; /* Light red background for errors */
+                                padding: 10px 15px;
+                                border: 1px solid #f5c6cb; /* Red border */
+                                border-radius: 5px;
+                                font-weight: bold;
+                                margin: 10px 0;
+                            }
+                        </style>
+
+                        <div class="message-container">
+                            {% if messages %}
+                            {% for message in messages %}
+                            <h4 class="{% if message.tags == 'success' %}success-message{% elif message.tags == 'error' %}error-message{% endif %}">
+                                {{ message }}
+                            </h4>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <form action="{% url 'home:contact' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <input name="name" type="text" class="form-control" placeholder="Your Name"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-6">
+                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number"/>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <select name="service" id="" class="form-control wide">
+                                    <option value="">Select Service</option>
+                                    {% for service in services %}
+                                    <option value="{{service.id}}">{{service.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <input type="email" class="form-control" name="email" placeholder="Email"/>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <input type="text" name="message" class="message-box form-control" placeholder="Message"/>
+                            </div>
+                        </div>
+                        <div class="btn_box">
+                            <button>
+                                SEND
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <form action="{% url 'home:contact' %}" method="post">
-          {% csrf_token %}
-          <div class="form-row">
-            <div class="form-group col">
-              <input name="name" type="text" class="form-control" placeholder="Your Name" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col-lg-6">
-              <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" />
-            </div>
-            <div class="form-group col-lg-6">
-              <select name="service" id="" class="form-control wide">
-                <option value="">Select Service</option>
-                {% for service in services %}
-                <option value="{{service.id}}">{{service.name}}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col">
-              <input type="email" class="form-control" name="email" placeholder="Email" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group col">
-              <input type="text" name="message" class="message-box form-control" placeholder="Message" />
-            </div>
-          </div>
-          <div class="btn_box">
-            <button>
-              SEND
-            </button>
-          </div>
-        </form>
-      </div>
     </div>
-  </div>
-</div>
 </section>
 <!-- end contact section -->

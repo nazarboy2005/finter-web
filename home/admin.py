@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AboutModel, ServiceModel, ContactModel
+from .models import AboutModel, ServiceModel, ContactModel, StaffModel, TestimonialModel
 
 
 @admin.register(AboutModel)
@@ -25,3 +25,19 @@ class ContactModelAdmin(admin.ModelAdmin):
 
     def short_message(self, obj):
         return obj.message[:50]
+
+
+@admin.register(StaffModel)
+class StaffModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'position', 'web_display']
+    search_fields = ['name', 'position']
+    list_filter = ['name', 'position','web_display']
+
+
+@admin.register(TestimonialModel)
+class TestimonialModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'is_displayed', 'created_at']
+    search_fields = ['name', 'is_displayed', 'created_at']
+    list_filter = ['name', 'is_displayed', 'created_at']
+
+
