@@ -19,7 +19,7 @@ class ServiceModelAdmin(admin.ModelAdmin):
 
 @admin.register(ContactModel)
 class ContactModelAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'is_answered', 'service__name', 'short_message']
+    list_display = ['name', 'email', 'is_answered', 'service__name', 'short_message', 'created_at']
     list_filter = ['name', 'email','phone_number', 'is_answered']
     search_fields = ['name', 'email','phone_number']
 

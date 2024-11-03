@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView, CreateView, View
-from .models import AboutModel, ServiceModel
+from django.contrib import messages
+
+from .models import AboutModel, ServiceModel, ContactModel
 from django.urls import reverse_lazy
+from .forms import ContactModelForm
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -50,6 +53,21 @@ class TeamView(TemplateView):
 
 class ContactView(CreateView):
     template_name = 'contact.html'
+    form_class = ContactModelForm
     success_url = reverse_lazy('home:home')
-    # model = ContactModel
-    # form_class = ContactModelForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["services"] = ServiceModel.objects.filter(is_available=True)
+
+        return context
+
+    def form_valid(self, form):
+        form.save()
+        # messages.success("Your message is well-received!")
+        return redirect(self.success_url)
+
+    def form_invalid(self, form):
+        # messages.error()
+        return redirect("home:about")
+
