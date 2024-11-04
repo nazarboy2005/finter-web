@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, TemplateView, CreateView, View
+from django.shortcuts import redirect
+from django.views.generic import TemplateView, CreateView, View
 from django.contrib import messages
 
 from conf import settings
-from .models import AboutModel, ServiceModel, ContactModel, StaffModel, TestimonialModel
-from django.urls import reverse_lazy
+from .models import AboutModel, ServiceModel, StaffModel, TestimonialModel, SubscribersModel
 from .forms import ContactModelForm
 from django.core.mail import send_mail
+from django.http import HttpResponse
+
 
 class HomeView(TemplateView):
     template_name = 'index.html'
@@ -23,7 +24,6 @@ class HomeView(TemplateView):
 
         context['workers'] = StaffModel.objects.filter(is_working=True, web_display=True)
         context['testimonials'] = TestimonialModel.objects.filter(is_displayed=True)
-
 
         return context
 
@@ -80,14 +80,28 @@ class ContactView(CreateView):
         messages.error(self.request, form.errors)
         return redirect("home:contact")
 
+
 def send_email(email):
-    with open('../subscribe-email.txt', 'r') as file:
+    with open('subscribe-email.txt', 'r') as file:
         text = file.read()
         try:
-            send_mail(message=text, subject="Welcome to FINTER! You've Successfully Subscribed ", recipient_list=[email],
+            send_mail(message=text, subject="Welcome to FINTER! You've Successfully Subscribed ",
+                      recipient_list=[email],
                       from_email=settings.EMAIL_HOST_USER)
 
             return True
         except ConnectionError as e:
             return False
 
+
+def subscribe_view(request):
+    subscriber_email = request.POST.get('subscriber_email')
+    next_url = request.GET.get('next', '/')
+    print(next_url)
+    if subscriber_email and send_email(subscriber_email):
+        SubscribersModel.objects.create(
+            email=subscriber_email
+        )
+        return redirect(next_url)
+    else:
+        return HttpResponse("Subscription Failed")

@@ -93,3 +93,15 @@ class TestimonialModel(models.Model):
     class Meta:
         verbose_name = 'Testimonial'
         verbose_name_plural = 'Testimonials'
+
+
+
+class SubscribersModel(models.Model):
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'Subscriber email'
+        verbose_name_plural = 'Subscriber emails'

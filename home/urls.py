@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView, AboutView, ContactView, ServiceView, TeamView
+from .views import HomeView, AboutView, ContactView, ServiceView, TeamView, subscribe_view
 
 app_name = 'home'
 
@@ -9,6 +9,7 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('services/', ServiceView.as_view(), name='services'),
     path('team/', TeamView.as_view(), name='team'),
+    path('subscribe/', subscribe_view, name='subscribe' )
 ]
 
 

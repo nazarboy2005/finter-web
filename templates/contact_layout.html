@@ -52,7 +52,7 @@
                         </div>
 
                     </div>
-                    <form action="{% url 'home:contact' %}" method="post">
+                    <form action="{% url 'home:contact' %}?next={{request.get_full_path|urlencode}}" method="post">
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="form-group col">

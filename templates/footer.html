@@ -57,8 +57,9 @@ FINTER delivers expert welding services for cars, homes, machinery, and motorcyc
               <h5>
                 NEWSLETTER
               </h5>
-              <form action="">
-                <input type="text" placeholder="Enter Your Email" />
+              <form method="post" action="{% url 'home:subscribe' %}?next={{request.get_full_path|urlencode}}">
+                {% csrf_token  %}
+                <input type="text" name="subscriber_email" placeholder="Enter Your Email" />
                 <button type="submit">
                   Subscribe
                 </button>
