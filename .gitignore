@@ -62,7 +62,6 @@ celerybeat-schedule
 *.pid
 
 # SQLAlchemy
-*.sqlite3
 
 # Cython debug symbols
 cython_debug/
